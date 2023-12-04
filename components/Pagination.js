@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   item: {
     width: itemSize,
     height: itemSize,
-    backgroundColor: 'white',
+    backgroundColor: 'gray',
     borderRadius: itemSize,
     marginRight: itemSpacing,
   },

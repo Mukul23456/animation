@@ -44,7 +44,7 @@ const items = [
 ];
 
 const Carousel = () => {
-  const scrollRef = useRef();
+  const scrollRef = useRef(null);
   const smallImageTranslation = useRef(new Animated.Value(0)).current;
 
   const onPanResponderMove = (_, gestureState) => {
