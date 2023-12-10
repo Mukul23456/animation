@@ -47,18 +47,8 @@ const Carousel = () => {
   const scrollRef = useRef(null);
   const smallImageTranslation = useRef(new Animated.Value(0)).current;
 
-  const onPanResponderMove = (_, gestureState) => {
-    const { dx } = gestureState;
-    smallImageTranslation.setValue(-dx);
-  };
-
-  const smallImagePanResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderMove,
-    }),
-  ).current;
+  
+ 
 
   return (
     <View style={styles.screen}>
@@ -137,7 +127,7 @@ const Carousel = () => {
                       ],
                     },
                   ]}
-                  {...smallImagePanResponder.panHandlers}
+                 
                 />
               </Animated.View>
             </View>

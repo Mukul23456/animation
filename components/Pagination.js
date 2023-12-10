@@ -1,34 +1,17 @@
 import React from 'react';
-import { Animated, Dimensions, View, StyleSheet, Pressable } from 'react-native';
+import {Animated, Dimensions, View, StyleSheet, Pressable} from 'react-native';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 const itemSize = 15;
-const activeItemSize = itemSize + 4;
+const activeItemSize = itemSize;
 const itemSpacing = 15;
 
-const Pagination = ({ items, scrollAnimation, scrollRef }) => {
-  const inputRange = items.map((_, i) => width * i);
-
+const Pagination = ({items, scrollAnimation, scrollRef}) => {
+  
   const translateX = scrollAnimation.interpolate({
-    inputRange,
+    inputRange:items.map((_, i) => width * i),
     outputRange: items.map((_, i) => i * (itemSize + itemSpacing)),
-  });
-
-  const scale = scrollAnimation.interpolate({
-    inputRange,
-    outputRange: items.map((_, i) => {
-      const baseScale = 0.8;
-      const scaleFactor = 0.2;
-      const distance = Math.abs(i * (itemSize + itemSpacing) - translateX._value);
-      const scaleValue = 1 - scaleFactor * (distance / width);
-      return scaleValue > baseScale ? scaleValue : baseScale;
-    }),
-  });
-
-  const opacity = scrollAnimation.interpolate({
-    inputRange,
-    outputRange: items.map(() => 1),
   });
 
   return (
@@ -38,12 +21,11 @@ const Pagination = ({ items, scrollAnimation, scrollRef }) => {
           style={[
             styles.activeItem,
             {
-              transform: [{ translateX }, { scale }],
-              opacity,
+              transform: [{translateX}],
             },
           ]}
         />
-        {items.map(({ id }, index) => (
+        {items.map(({id}, index) => (
           <Pressable
             key={id}
             onPress={() => {
@@ -80,7 +62,7 @@ const styles = StyleSheet.create({
   item: {
     width: itemSize,
     height: itemSize,
-    backgroundColor: 'gray',
+    backgroundColor: 'white',
     borderRadius: itemSize,
     marginRight: itemSpacing,
   },
@@ -92,9 +74,8 @@ const styles = StyleSheet.create({
   },
   activeItem: {
     position: 'absolute',
-    left: (itemSize - activeItemSize) / 2,
-    top: (itemSize - activeItemSize) / 2,
-    width: activeItemSize+13,
+    
+    width: activeItemSize + 13,
     height: activeItemSize,
     borderRadius: activeItemSize / 2,
     borderWidth: 1,
@@ -103,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Pagination
+export default Pagination;
